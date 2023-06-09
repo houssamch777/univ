@@ -4,7 +4,7 @@ if (isset($_SESSION["superuser"])) {
   header("Location: dashboard.php");
   // code...
 }
-if (isset($_SESSION["student"]) && isset($_SESSION["student_image"])) {
+if (isset($_SESSION["student"])) {
   if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) {
     // last request was more than 30 minutes ago
     session_unset();     // unset $_SESSION variable for the run-time 
@@ -24,7 +24,7 @@ $image=$_SESSION["student_image"];
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Page Title</title>
+  <title>Home</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
   <style>
     body {
@@ -46,6 +46,17 @@ $image=$_SESSION["student_image"];
       width: 100%;
       height: auto;
     }
+
+  .image-label {
+    background-color: #fff;
+    color: #000;
+    font-size: 14px;
+    text-align: center;
+    padding: 5px;
+    margin-top: 5px;
+    font-weight: bold;
+  }
+
   </style>
 </head>
 <body>
@@ -60,6 +71,9 @@ $image=$_SESSION["student_image"];
           <ul class="navbar-nav">
             <li class="nav-item">
               <a class="nav-link" href="index.php">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="image_upload.php">Upload</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">About & Contact</a>
@@ -77,25 +91,48 @@ $image=$_SESSION["student_image"];
     </div>
   </header>
   
-  <main>
-    <div class="container mt-4">
-      <div class="row">
-        <div class="col-md-4">
-          <img src="<?php echo $image["url"]; ?>" alt="Student Image" class="img-fluid">
-        </div>
-        <div class="col-md-8">
-          <h2><?php echo $student["firstname"]." ".$student["lastname"]; ?></h2>
-          <p>
-                    <strong>Birthday:</strong> <?php echo $student["birthday"]; ?><br>
-                    <strong>University Name:</strong> <?php echo $student["univname"]; ?><br>
-                    <strong>Department:</strong> <?php echo $student["department"]; ?><br>
-                    <strong>Specialty:</strong> <?php echo $student["specialty"]; ?><br>
-                    <strong>Card ID:</strong> <?php echo $student["card_id"]; ?><br>
-          </p>
+<main>
+  <div class="container mt-4">
+    <div class="row align-items-center">
+      <div class="col-md-2">
+        <div class="image-container">
+          <img src="<?php echo $image["front"]; ?>" alt="Front Image" class="img-fluid">
+          <div class="image-label">Front</div>
         </div>
       </div>
+      <div class="col-md-2">
+        <div class="image-container">
+          <img src="<?php echo $image["right"]; ?>" alt="Right Image" class="img-fluid">
+          <div class="image-label">Right</div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="image-container">
+          <img src="<?php echo $image["left"]; ?>" alt="Left Image" class="img-fluid">
+          <div class="image-label">Left</div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="image-container">
+          <img src="<?php echo $image["far"]; ?>" alt="Far Image" class="img-fluid">
+          <div class="image-label">Far</div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <h2><?php echo $student["firstname"]." ".$student["lastname"]; ?></h2>
+        <p>
+          <strong>Birthday:</strong> <?php echo $student["birthday"]; ?><br>
+          <strong>University Name:</strong> <?php echo $student["univname"]; ?><br>
+          <strong>Department:</strong> <?php echo $student["department"]; ?><br>
+          <strong>Specialty:</strong> <?php echo $student["specialty"]; ?><br>
+          <strong>Card ID:</strong> <?php echo $student["card_id"]; ?><br>
+        </p>
+        <a href="image_upload.php" class="btn btn-primary">Update</a>
+      </div>
     </div>
-  </main>
+  </div>
+</main>
+
   
   <footer>
     <div class="container text-center">

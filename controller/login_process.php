@@ -1,9 +1,12 @@
 <?php
 require "../model/DataBase.php";
 $db = new DataBase();
-if (isset($_POST['cardid']) && isset($_POST['imageid'])) {
+
+if (isset($_POST['cardid']) && isset($_POST['date'])) {
+    
     if ($db->dbConnect()) {
-        $login=$db->studentLogin( $_POST['cardid'], $_POST['imageid']);
+
+        $login=$db->studentLogin( $_POST['cardid'], $_POST['date']);
         if ($login) {
             session_start();
             $_SESSION["student"] = $login;
@@ -13,6 +16,7 @@ if (isset($_POST['cardid']) && isset($_POST['imageid'])) {
 
         } else {
             echo "auth wrong";
+            echo $_POST['date'];
             header("Location: ../login.php");
     }
     } else {echo "Error: Database connection";

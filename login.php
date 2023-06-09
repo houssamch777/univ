@@ -49,10 +49,10 @@ if (isset($_SESSION["student"]) && isset($_SESSION["student_image"])) {
               <input type="text" class="form-control" id="cardid" name="cardid" placeholder="Enter your card ID" required>
             </div>
             <div class="mb-3">
-              <label for="imageid" class="form-label">Image ID</label>
-              <input type="text" class="form-control" id="imageid" name="imageid" placeholder="Enter your image ID" required>
+              <label for="imageid" class="form-label">birth date</label>
+              <input type="date" class="form-control" id="date" name="date"  required>
             </div>
-            <button type="submit" class="btn btn-primary">Sign In</button>
+            <button type="submit" class="btn btn-primary">Log In</button>
           </form>
         </div>
       </div>

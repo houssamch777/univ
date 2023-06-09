@@ -34,12 +34,12 @@ class DataBase
         return mysqli_real_escape_string($this->connect, stripslashes(htmlspecialchars($data)));
     }
 
-    public function studentLogin($card_id, $imageid)
+    public function studentLogin($card_id, $date)
 {
     $card_id = $this->prepareData($card_id);
-    $imageid = $this->prepareData($imageid);
+    $date = $this->prepareData($date);
 
-    $this->sql = "SELECT * FROM student WHERE card_id = '" . $card_id . "' AND imageid = '" . $imageid . "'";
+    $this->sql = "SELECT * FROM student WHERE card_id = '" . $card_id . "' AND birthday = '" . $date . "'";
     $result = mysqli_query($this->connect, $this->sql);
     $row = mysqli_fetch_assoc($result);
 
