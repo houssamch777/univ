@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1
--- Généré le : sam. 10 juin 2023 à 01:55
+-- Généré le : sam. 10 juin 2023 à 18:49
 -- Version du serveur : 10.4.24-MariaDB
 -- Version de PHP : 8.1.6
 
@@ -40,7 +40,9 @@ CREATE TABLE `image` (
 --
 
 INSERT INTO `image` (`id`, `front`, `left`, `right`, `far`) VALUES
-(1, 'student-images\\front.png', 'student-images\\left.png', 'student-images\\right.png', 'student-images\\far.png');
+(8, 'houssam_cheriet/64846b331803c.jpg', 'houssam_cheriet/64846b33190a1.jpg', 'houssam_cheriet/64846b3319dc6.jpg', 'houssam_cheriet/64846b331aa7a.jpg'),
+(9, 'houssam_cheriet/6484a57cc34c4.jpg', 'houssam_cheriet/6484a57cc4366.jpg', 'houssam_cheriet/6484a57cc4b54.jpg', 'houssam_cheriet/6484a57cc5302.png'),
+(10, 'houssem eddine_cheriet/6484a6a1322fb.jpg', 'houssem eddine_cheriet/6484a6a132750.png', 'houssem eddine_cheriet/6484a6a132b42.jpg', 'houssem eddine_cheriet/6484a6a133137.jpg');
 
 -- --------------------------------------------------------
 
@@ -59,7 +61,7 @@ CREATE TABLE `student` (
   `department` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `specialty` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `card_id` int(11) NOT NULL,
-  `imageid` int(11) NOT NULL
+  `imageid` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -67,7 +69,8 @@ CREATE TABLE `student` (
 --
 
 INSERT INTO `student` (`id`, `firstname`, `lastname`, `email`, `birthday`, `place`, `univname`, `department`, `specialty`, `card_id`, `imageid`) VALUES
-(1, 'houssam', 'cheriet', 'houssamcheriet@gmail.com', '2000-09-30', 'biskra', 'biskra university', 'computer science', 'ia', 35038643, 1);
+(1, 'houssam', 'cheriet', 'houssamcheriet@gmail.com', '2000-09-30', 'biskra', 'biskra university', 'computer science', 'ia', 35038643, 9),
+(2, 'houssem eddine', 'cheriet', 'houssamcheriet01@gmail.com', '2000-09-30', 'loutay', 'biskra', 'math', 'math', 35038644, 10);
 
 -- --------------------------------------------------------
 
@@ -96,8 +99,7 @@ INSERT INTO `super_user` (`id`, `username`, `password`) VALUES
 -- Index pour la table `image`
 --
 ALTER TABLE `image`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `id` (`id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Index pour la table `student`
@@ -106,7 +108,7 @@ ALTER TABLE `student`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `stedunt-card-id` (`card_id`),
   ADD UNIQUE KEY `email` (`email`),
-  ADD KEY `imageid` (`imageid`);
+  ADD KEY `student_ibfk_1` (`imageid`);
 
 --
 -- Index pour la table `super_user`
@@ -122,13 +124,13 @@ ALTER TABLE `super_user`
 -- AUTO_INCREMENT pour la table `image`
 --
 ALTER TABLE `image`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT pour la table `student`
 --
 ALTER TABLE `student`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT pour la table `super_user`
@@ -144,7 +146,7 @@ ALTER TABLE `super_user`
 -- Contraintes pour la table `student`
 --
 ALTER TABLE `student`
-  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`imageid`) REFERENCES `image` (`id`);
+  ADD CONSTRAINT `student_ibfk_1` FOREIGN KEY (`imageid`) REFERENCES `image` (`id`) ON DELETE SET NULL;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
