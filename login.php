@@ -1,6 +1,6 @@
 <?php
 session_start();
-
+$error = isset($_GET['error']) ? $_GET['error'] : null;
 if (isset($_SESSION["student"]) && isset($_SESSION["student_image"])) {
   if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 1800)) {
     header("Location: index.php");
@@ -44,6 +44,11 @@ if (isset($_SESSION["student"]) && isset($_SESSION["student_image"])) {
         <div class="col-md-4">
           <form action="./controller/login_process.php" method="POST">
             <h3 class="mb-4">Student Login</h3>
+            <?php if (isset($error)) { ?>
+              <div class="alert alert-danger" role="alert">
+                <?php echo $error; ?>
+              </div>
+    <?php } ?>
             <div class="mb-3">
               <label for="cardid" class="form-label">Card ID</label>
               <input type="text" class="form-control" id="cardid" name="cardid" placeholder="Enter your card ID" required>

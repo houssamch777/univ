@@ -39,7 +39,48 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
         .sticky-footer {
             flex-shrink: none;
         }
+            .card {
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
+    }
 
+    .card-header {
+        background-color: #f2f2f2;
+        padding: 10px;
+        font-weight: bold;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .image-line {
+        display: flex;
+        flex-wrap: wrap;
+        margin-bottom: 20px;
+    }
+
+    .image-container {
+        width: 200px;
+        margin-right: 20px;
+        margin-bottom: 20px;
+    }
+
+    .image-container img {
+        width: 100%;
+        height: auto;
+    }
+
+    .image-label {
+        margin-top: 5px;
+        text-align: center;
+    }
+
+    .subfolder-label {
+        font-weight: bold;
+        margin-bottom: 10px;
+        margin-right: 20px;
+    }
     </style>
 </head>
 <body>
@@ -69,51 +110,14 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
         </div>
     </nav>
 
+
     <!-- Main Content -->
     <main>
         <div class="container mt-4">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <h2>Student Table</h2>
-                    </div>
-                    <div class="col-md-6 text-right">
-                         <a href="student.php" class="btn btn-primary">Add New Student</a>
-                    </div>
-                     </div>
-                    
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Search by student name">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button">Search</button>
-                        </div>
-                    </div>
-
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <th>Birth date</th>
-                                <th>Palce of birth</th>
-                                <th>Univertiy</th>
-                                <th>Department</th>
-                                <th>Specialty</th>
-                                <th>Card id</th>
-                                <th>Edit</th>
-                                <th>delete</th>
-                                <!-- Add more columns as needed -->
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Display student data here -->
-                            <?php include 'controller/show_student_table.php'; ?>
-                        </tbody>
-                    </table>
-                    
+                    <!-- Display student data here -->
+                    <?php include 'controller/images.php'; ?>
                 </div>
             </div>
         </div>

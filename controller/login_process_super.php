@@ -2,6 +2,8 @@
 require "../model/DataBase.php";
 $db = new DataBase();
 
+
+
 if (isset($_POST['username']) && isset($_POST['password'])) {
     if ($db->dbConnect()) {
         $login = $db->superuserLogin($_POST['username'], $_POST['password']);

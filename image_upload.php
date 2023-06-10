@@ -1,3 +1,27 @@
+<?php // Check if there's an error message in the URL parameters
+$error = isset($_GET['error']) ? $_GET['error'] : null;
+session_start();
+if (isset($_SESSION["superuser"])) {
+  header("Location: dashboard.php");
+  // code...
+}
+if (isset($_SESSION["student"])) {
+  if (isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] > 1800)) {
+    // last request was more than 30 minutes ago
+    session_unset();     // unset $_SESSION variable for the run-time 
+    session_destroy();   // destroy session data in storage
+    header("Location: login.php");
+}
+$_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
+}
+else
+{
+  header("Location: login.php");
+}
+
+
+
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,30 +96,35 @@
 
   <div class="container mt-5">
     <h2>Image Upload</h2>
+    <?php if (isset($error)) { ?>
+              <div class="alert alert-danger" role="alert">
+                <?php echo $error; ?>
+              </div>
+    <?php } ?>
     <form action="./controller/upload.php" method="POST" enctype="multipart/form-data">
       <div class="row">
         <div class="col-md-3">
           <div class="mb-3">
             <label for="frontImage">Front Image:</label>
-            <input type="file" class="form-control" id="frontImage" name="frontImage" accept="image/*" required>
+            <input type="file" class="form-control" id="frontImage" name="frontImage" accept="image/jpeg, image/png" required>
           </div>
         </div>
         <div class="col-md-3">
           <div class="mb-3">
             <label for="rightImage">Right Image:</label>
-            <input type="file" class="form-control" id="rightImage" name="rightImage" accept="image/*" required>
+            <input type="file" class="form-control" id="rightImage" name="rightImage" accept="image/jpeg, image/png" required>
           </div>
         </div>
         <div class="col-md-3">
           <div class="mb-3">
             <label for="leftImage">Left Image:</label>
-            <input type="file" class="form-control" id="leftImage" name="leftImage" accept="image/*" required>
+            <input type="file" class="form-control" id="leftImage" name="leftImage" accept="image/jpeg, image/png" required>
           </div>
         </div>
         <div class="col-md-3">
           <div class="mb-3">
             <label for="farImage">Far Image:</label>
-            <input type="file" class="form-control" id="farImage" name="farImage" accept="image/*" required>
+            <input type="file" class="form-control" id="farImage" name="farImage" accept="image/jpeg, image/png" required>
           </div>
         </div>
       </div>

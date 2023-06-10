@@ -72,50 +72,56 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
     <!-- Main Content -->
     <main>
         <div class="container mt-4">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="row align-items-center">
-                    <div class="col-md-6">
-                        <h2>Student Table</h2>
-                    </div>
-                    <div class="col-md-6 text-right">
-                         <a href="student.php" class="btn btn-primary">Add New Student</a>
-                    </div>
-                     </div>
-                    
-                    <div class="input-group mb-3">
-                        <input type="text" class="form-control" placeholder="Search by student name">
-                        <div class="input-group-append">
-                            <button class="btn btn-outline-secondary" type="button">Search</button>
-                        </div>
-                    </div>
+            <form action="./controller/process-student.php" method="post" class="mt-4">
+    <div class="form-group">
+        <label for="firstname">First Name:</label>
+        <input type="text" id="firstname" name="firstname" class="form-control" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="lastname">Last Name:</label>
+        <input type="text" id="lastname" name="lastname" class="form-control" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" class="form-control" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="birthday">Birthday:</label>
+        <input type="date" id="birthday" name="birthday" class="form-control" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="place">Place:</label>
+        <input type="text" id="place" name="place" class="form-control" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="univname">University Name:</label>
+        <input type="text" id="univname" name="univname" class="form-control" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="department">Department:</label>
+        <input type="text" id="department" name="department" class="form-control" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="specialty">Specialty:</label>
+        <input type="text" id="specialty" name="specialty" class="form-control" required>
+    </div>
+    
+    <div class="form-group">
+        <label for="card_id">Card ID:</label>
+        <input type="text" id="card_id" name="card_id" class="form-control" required>
+    </div>
+    
+    
+    <button type="submit" class="btn btn-primary">Add Student</button>
+</form>
 
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>First Name</th>
-                                <th>Last Name</th>
-                                <th>Email</th>
-                                <th>Birth date</th>
-                                <th>Palce of birth</th>
-                                <th>Univertiy</th>
-                                <th>Department</th>
-                                <th>Specialty</th>
-                                <th>Card id</th>
-                                <th>Edit</th>
-                                <th>delete</th>
-                                <!-- Add more columns as needed -->
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <!-- Display student data here -->
-                            <?php include 'controller/show_student_table.php'; ?>
-                        </tbody>
-                    </table>
-                    
-                </div>
-            </div>
         </div>
     </main>
 
@@ -130,3 +136,5 @@ $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+

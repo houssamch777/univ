@@ -2,6 +2,7 @@
 session_start();
 if (isset($_SESSION["superuser"])) {
   header("Location: dashboard.php");
+  exit();
   // code...
 }
 if (isset($_SESSION["student"])) {
@@ -10,13 +11,18 @@ if (isset($_SESSION["student"])) {
     session_unset();     // unset $_SESSION variable for the run-time 
     session_destroy();   // destroy session data in storage
     header("Location: login.php");
+    exit();
 }
 $_SESSION['LAST_ACTIVITY'] = time(); // update last activity time stamp
 $student=$_SESSION["student"];
-$image=$_SESSION["student_image"];
+if (isset($_SESSION["student_image"])) {
+  $image=$_SESSION["student_image"];
+}
+
 }else
 {
   header("Location: login.php");
+  exit();
 }
 
 
@@ -94,27 +100,28 @@ $image=$_SESSION["student_image"];
 <main>
   <div class="container mt-4">
     <div class="row align-items-center">
-      <div class="col-md-2">
+
+        <div class="col-md-2">
         <div class="image-container">
-          <img src="<?php echo $image["front"]; ?>" alt="Front Image" class="img-fluid">
+          <img src="<?= !empty($image) ? "./student-images/".$image["front"] : "./student-images/default/front.png"?>" alt="Front Image" class="img-fluid">
           <div class="image-label">Front</div>
         </div>
       </div>
       <div class="col-md-2">
         <div class="image-container">
-          <img src="<?php echo $image["right"]; ?>" alt="Right Image" class="img-fluid">
+          <img src="<?= !empty($image) ? "./student-images/".$image["right"] : "./student-images/default/right.png"?>" alt="Right Image" class="img-fluid">
           <div class="image-label">Right</div>
         </div>
       </div>
       <div class="col-md-2">
         <div class="image-container">
-          <img src="<?php echo $image["left"]; ?>" alt="Left Image" class="img-fluid">
+          <img src="<?= !empty($image) ? "./student-images/".$image["left"] : "./student-images/default/left.png"?>" alt="Left Image" class="img-fluid">
           <div class="image-label">Left</div>
         </div>
       </div>
       <div class="col-md-2">
         <div class="image-container">
-          <img src="<?php echo $image["far"]; ?>" alt="Far Image" class="img-fluid">
+          <img src="<?= !empty($image) ? "./student-images/".$image["far"] : "./student-images/default/far.png"?>" alt="Far Image" class="img-fluid">
           <div class="image-label">Far</div>
         </div>
       </div>
@@ -127,7 +134,7 @@ $image=$_SESSION["student_image"];
           <strong>Specialty:</strong> <?php echo $student["specialty"]; ?><br>
           <strong>Card ID:</strong> <?php echo $student["card_id"]; ?><br>
         </p>
-        <a href="image_upload.php" class="btn btn-primary">Update</a>
+        <a href="image_upload.php" class="btn btn-primary"><?= !empty($image) ? "Edit" : "Upload "?></a>
       </div>
     </div>
   </div>

@@ -1,5 +1,16 @@
 <?php // Check if there's an error message in the URL parameters
 $error = isset($_GET['error']) ? $_GET['error'] : null;
+
+session_start();
+if (isset($_SESSION["superuser"])&&isset($_SESSION['LAST_ACTIVITY']) && (time() - $_SESSION['LAST_ACTIVITY'] < 1800)) {
+  header("Location: dashboard.php");
+  exit();
+  // code...
+}
+else
+{session_unset();     // unset $_SESSION variable for the run-time 
+    session_destroy();   // destroy session data in storage
+  }
 ?>
 <!DOCTYPE html>
 <html>
@@ -62,7 +73,7 @@ $error = isset($_GET['error']) ? $_GET['error'] : null;
   
   <footer class="mt-auto">
     <div class="container text-center">
-      <p>&copy; 2023 biskra univ. All rights reserved.</p>
+      <p>&copy; 2023 biskra univ. All rights reserved.| <a href="index.php">Home</a></p></p>
     </div>
   </footer>
 
